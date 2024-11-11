@@ -2,7 +2,14 @@
     <h1>Overview</h1>
 
     <nav class="center">
-        <a class="button">Statistics</a>
-        <a class="button">Panel</a>
+        <a class="button" routerLink="statistics">Statistics</a>
+        <a class="button" routerLink="panel">Panel</a>
     </nav>
+
+    <!-- @if (showStatistics) {
+        <app-statistics />
+
+    } -->
+
+    <router-outlet />
 </div>
