@@ -1,0 +1,84 @@
+<div style="border: solid 4px black; padding: 16px; margin: 10px">
+  <h1>ngIf vs if</h1>
+
+  <div *ngIf="decision">ngIf</div>
+
+  <hr />
+
+  @if (decision) {
+    if
+  }
+</div>
+
+<!-- ///////////////////////////// -->
+
+<div style="border: solid 4px black; padding: 16px; margin: 10px">
+  <h1>ngIf else vs if else</h1>
+
+  <div *ngIf="weight > 500; else check250">vic nez 500</div>
+
+  <ng-template #check250
+    ><p *ngIf="weight > 250; else lessThan250">
+      vic nez 250 a min nez 500
+    </p></ng-template
+  >
+
+  <ng-template #lessThan250;>mene nez 250</ng-template>
+
+  <hr />
+
+  @if (weight > 500) {
+    vic nez 500
+  } @else if (weight > 250) {
+    vic nez 250 a min nez 500
+  } @else {
+    mene nez 250
+  }
+</div>
+
+<!-- ///////////////////////////// -->
+
+<div [ngSwitch]="tv">
+  <div *ngSwitchCase="'nova'">Nova</div>
+  <div *ngSwitchCase="'ct1'">Čt1</div>
+</div>
+
+@switch (tv) {
+  @case ("nova") {
+    nova
+  }
+}
+
+<!-- ///////////////////////////// -->
+
+<ul>
+  <li
+    *ngFor="
+      let member of members;
+      let i = index;
+      let first = first;
+      let last = last;
+      let even = even;
+      let odd = odd;
+      trackBy: trackByMemberId
+    "
+  >
+    even: {{ even }} {{ i + 1 }} {{ member.name }}
+  </li>
+</ul>
+
+<!-- ///////////////////////////// -->
+
+<ul>
+  @for (
+    member of members;
+    track member.id;
+    let i = $index;
+    let first = $first;
+    let last = $last;
+    let even = $even;
+    let odd = $odd
+  ) {
+    even: {{ even }} {{ i + 1 }} {{ member.name }}
+  }
+</ul>
