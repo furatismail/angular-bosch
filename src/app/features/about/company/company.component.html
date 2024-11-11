@@ -2,5 +2,8 @@
 
 
 <div class="center">
+    <button (click)="getUsers()">get users</button>
     <button (click)="navigateToTeam()">Navigate to team component</button>
 </div>
+
+{{members$ | async | json}}
