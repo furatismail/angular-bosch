@@ -1,10 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { SignalSearchComponent } from "./signals/signal-search/signal-search.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, RouterLink, SignalSearchComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
