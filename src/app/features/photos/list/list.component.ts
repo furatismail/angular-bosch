@@ -1,25 +1,32 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { PhotoService } from '../../../core/services/photo.service';
-import { lastValueFrom } from 'rxjs';
+import { JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [],
+  imports: [JsonPipe, RouterLink],
   templateUrl: './list.component.html',
-  styleUrl: './list.component.css'
+  styleUrl: './list.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListComponent implements OnInit {
-  private photoService = inject(PhotoService)
-  
-  async ngOnInit() {
-    try {
-      const response = await lastValueFrom(this.photoService.getImages())
-      console.log(response)
-    } catch (error) {
-      console.log(error)
-    }
-   
+  photos: Array<any> = []
+  private cd = inject(ChangeDetectorRef)
+  private activatedRoute = inject(ActivatedRoute) 
+
+  ngOnInit() {
+    console.log(this.activatedRoute)
+
+    this.activatedRoute.data.subscribe((data: any) => {
+      setTimeout(() => {
+        this.photos = data?.photos
+        this.cd.detectChanges()
+        console.log('run')
+      }, 1000);
+
+    })
+
   }
 
 }

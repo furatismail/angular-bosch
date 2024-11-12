@@ -1,0 +1,15 @@
+<p>Search string {{search}}</p>
+
+<input type="text" (input)="setSearchString($event)" />
+
+<hr>
+
+<ul>
+    @for (user of filteredUsers; track $index) {
+        {{user.name}}
+    }
+</ul>
+
+<hr>
+
+<button (click)="addUser()">Pridej nahodneho uzivatele</button>
