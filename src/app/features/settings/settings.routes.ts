@@ -12,6 +12,7 @@ export const SettingsRoutes: Routes = [
             {
                 path: 'statistics',
                 loadComponent: () => import('./statistics/statistics.component').then((component) => component.StatisticsComponent),
+                data: {preload: true, preloadDelay: 8000}
             }
         ]
     }

@@ -7,7 +7,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [StatisticsComponent, RouterOutlet, RouterLink],
   templateUrl: './overview.component.html',
-  styleUrl: './overview.component.css'
+  styleUrl: './overview.component.css',
 })
 export class OverviewComponent {
   showStatistics = false
