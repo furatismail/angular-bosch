@@ -1,11 +1,11 @@
-<p>Search string {{search}}</p>
+<p>Search string {{search()}}</p>
 
 <input type="text" (input)="setSearchString($event)" />
 
 <hr>
 
 <ul>
-    @for (user of filteredUsers; track $index) {
+    @for (user of filteredUsers(); track $index) {
        <li> {{user.name}} </li>
     }
 </ul>

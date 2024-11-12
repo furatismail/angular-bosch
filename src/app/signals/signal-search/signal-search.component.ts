@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+
+
+import { Component, computed, effect, signal } from '@angular/core';
 
 @Component({
   selector: 'app-signal-search',
@@ -8,24 +10,36 @@ import { Component } from '@angular/core';
   styleUrl: './signal-search.component.css'
 })
 export class SignalSearchComponent {
-  search = ''
-  users = [
+  search = signal(localStorage.getItem('searchString') || '')
+  users = signal([
     {
       id: 1, name: "Karel",
     },
     {
       id: 2, name: 'Petr'
     }
-  ]
+  ])
 
-  filteredUsers = this.users
+  constructor() {
+    effect(() => {
+      console.log('run')
+      console.log(this.search())
+      localStorage.setItem('searchString', this.search())
+      this.search.set('ahoj')
+  
+
+    }, {
+      allowSignalWrites: true
+    })
+  }
+
+  readonly filteredUsers = computed(() => this.users().filter((user) => user.name.toLowerCase().startsWith(this.search())))
 
   setSearchString(e: Event) {
-    this.search = (e.target as HTMLInputElement).value.toLowerCase()
-    this.filteredUsers = this.users.filter((user) => user.name.toLowerCase().startsWith(this.search))
+    this.search.set((e.target as HTMLInputElement).value.toLowerCase())
   }
 
   addUser() {
-    this.users = [...this.users, {id: 3, name: "Pepa"}]
+    this.users.update((users) => [...users, {id: 3, name: "Pepa"}])
   }
 }
